@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Proyecto: Calculadora Ley de Ohm</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f0f4f8;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #007bff;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        main {
+            max-width: 900px;
+            margin: auto;
+            padding: 20px;
+        }
+
+        section {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 0 10px #aaa;
+        }
+
+        h2 {
+            color: #007bff;
+        }
+
+        img {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            max-width: 80%;
+        }
+
+        .calculadora input, .calculadora select, .calculadora button {
+            width: 90%;
+            padding: 10px;
+            margin: 8px 0;
+            border-radius: 5px;
+            border: 1px solid #aaa;
+        }
+
+        .calculadora button {
+            background: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        .calculadora button:hover {
+            background: #0056b3;
+        }
+
+        #resultado {
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        pre {
+            background: #f5f5f5;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+
+        iframe {
+            display: block;
+            margin: auto;
+            max-width: 100%;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Proyecto: Calculadora Ley de Ohm</h1>
+</header>
+
+<main>
+
+    <!-- 2.1 Explicación teórica -->
+
+    <section>
+        <section>
+    <h2>Explicación Teórica</h2>
+    <div class="flex-teoria">
+        <!-- Imagen a la izquierda -->
+        
+        <img src="ley-ohm.png" alt="Ley de Ohm">
+
+        <!-- Texto a la derecha -->
+        <div>
+            <p>La Ley de Ohm es un principio fundamental de la electricidad que describe la relación entre <strong>voltaje (V)</strong>, <strong>corriente (I)</strong> y <strong>resistencia (R)</strong> en un circuito eléctrico. Fue formulada por el físico alemán <strong>Georg Simon Ohm</strong> en 1827.</p>
+
+            <p>Esta ley establece que la corriente que circula por un conductor es directamente proporcional al voltaje aplicado e inversamente proporcional a la resistencia del conductor.</p>
+
+            <ul>
+                <li><strong>Voltaje (V):</strong> Fuerza eléctrica que impulsa el movimiento de electrones a través del circuito.</li>
+                <li><strong>Corriente (I):</strong> Flujo de electrones que pasa por un conductor.</li>
+                <li><strong>Resistencia (R):</strong> Oposición que ofrece un material al paso de la corriente eléctrica.</li>
+            </ul>
+
+            <p>Las fórmulas básicas derivadas de la Ley de Ohm son:</p>
+            <ul>
+                <li>Voltaje: <strong>V = I × R</strong></li>
+                <li>Corriente: <strong>I = V / R</strong></li>
+                <li>Resistencia: <strong>R = V / I</strong></li>
+            </ul>
+
+            <p>La Ley de Ohm es ampliamente utilizada en electrónica, mecatrónica e ingeniería eléctrica para calcular cualquiera de estas tres variables si se conocen las otras dos. Permite diseñar circuitos seguros y eficientes, seleccionar resistencias correctas y prever el comportamiento de los dispositivos eléctricos.</p>
+        </div>
+    </div>
+</section>
+
+    <!-- 2. Calculadora interactiva -->
+    <section class="calculadora">
+        <h2>Calculadora de la Ley de Ohm</h2>
+
+        <label>Seleccione la variable que desea calcular:</label>
+        <select id="opcion">
+            <option value="V">Voltaje (V)</option>
+            <option value="I">Corriente (I)</option>
+            <option value="R">Resistencia (R)</option>
+        </select>
+
+        <div id="inputs"></div>
+        <button onclick="calcular()">Calcular</button>
+        <p id="resultado"></p>
+    </section>
+
+    <script>
+        function actualizarCampos() {
+            let op = document.getElementById("opcion").value;
+            let inputs = "";
+            if(op === "V") {
+                inputs += 'Corriente (A): <input type="number" id="I"><br>';
+                inputs += 'Resistencia (Ohmios): <input type="number" id="R"><br>';
+            } else if(op === "I") {
+                inputs += 'Voltaje (V): <input type="number" id="V"><br>';
+                inputs += 'Resistencia (Ohmios): <input type="number" id="R"><br>';
+            } else if(op === "R") {
+                inputs += 'Voltaje (V): <input type="number" id="V"><br>';
+                inputs += 'Corriente (A): <input type="number" id="I"><br>';
+            }
+            document.getElementById("inputs").innerHTML = inputs;
+        }
+
+        function calcular() {
+            let op = document.getElementById("opcion").value;
+            let V = parseFloat(document.getElementById("V")?.value);
+            let I = parseFloat(document.getElementById("I")?.value);
+            let R = parseFloat(document.getElementById("R")?.value);
+            let resultado = document.getElementById("resultado");
+            if(op === "V") resultado.textContent = "Voltaje = " + (I*R) + " V";
+            else if(op === "I") resultado.textContent = "Corriente = " + (V/R) + " A";
+            else if(op === "R") resultado.textContent = "Resistencia = " + (V/I) + " Ohmios";
+        }
+
+        actualizarCampos();
+        document.getElementById("opcion").addEventListener("change", actualizarCampos);
+    </script>
+    <!-- 2.2 Solución -->
+    <section>
+        <h2>Solución</h2>
+
+        <!-- Diagrama de flujo -->
+        <h3>Diagrama de flujo</h3>
+        <img src="Ley_de_Ohm.png" alt="Diagrama de flujo">
+
+        <!-- Pseudocódigo -->
+        <h3>Pseudocódigo</h3>
+        <pre>
+Proceso Calculadora_Ley_de_Ohm
+    Definir opcion Como Entero
+    Definir V, I, R Como Real
+	
+    Escribir "=== Calculadora de Ley de Ohm ==="
+    Escribir "Seleccione la variable que desea calcular:"
+    Escribir "1. Voltaje (V)"
+    Escribir "2. Corriente (I)"
+    Escribir "3. Resistencia (R)"
+    Escribir "Ingrese opcion (1-3): "
+    Leer opcion
+	
+    Segun opcion Hacer
+        1:
+            Escribir "Ingrese la corriente (A): "
+            Leer I
+            Escribir "Ingrese la resistencia (?): "
+            Leer R
+            V <- I * R
+            Escribir "El voltaje es: ", V, " V"
+			
+        2:
+            Escribir "Ingrese el voltaje (V): "
+            Leer V
+            Escribir "Ingrese la resistencia (?): "
+            Leer R
+            I <- V / R
+            Escribir "La corriente es: ", I, " A"
+			
+        3:
+            Escribir "Ingrese el voltaje (V): "
+            Leer V
+            Escribir "Ingrese la corriente (A): "
+            Leer I
+            R <- V / I
+            Escribir "La resistencia es: ", R, " ?"
+			
+        De Otro Modo:
+            Escribir "Opción no válida."
+    FinSegun
+	
+FinProceso
+
+        </pre>
+
+        <!-- Código fuente -->
+        <h3>Código fuente (C++)</h3>
+        <pre>
+#include <iostream>
+using namespace std;
+
+int main() {
+    int opcion;
+    float V, I, R;
+
+    cout << "=== Calculadora de Ley de Ohm ===" << endl;
+    cout << "Seleccione la variable que desea calcular:" << endl;
+    cout << "1. Voltaje (V)" << endl;
+    cout << "2. Corriente (I)" << endl;
+    cout << "3. Resistencia (R)" << endl;
+    cout << "Ingrese opcion (1-3): ";
+    cin >> opcion;
+
+    switch(opcion) {
+        case 1: // Voltaje
+            cout << "Ingrese la corriente (A): ";
+            cin >> I;
+            cout << "Ingrese la resistencia (Ohmios): ";
+            cin >> R;
+            V = I * R;
+            cout << "El voltaje es: " << V << " V" << endl;
+            break;
+
+        case 2: // Corriente
+            cout << "Ingrese el voltaje (V): ";
+            cin >> V;
+            cout << "Ingrese la resistencia (Ohmios): ";
+            cin >> R;
+            I = V / R;
+            cout << "La corriente es: " << I << " A" << endl;
+            break;
+
+        case 3: // Resistencia
+            cout << "Ingrese el voltaje (V): ";
+            cin >> V;
+            cout << "Ingrese la corriente (A): ";
+            cin >> I;
+            R = V / I;
+            cout << "La resistencia es: " << R << " Ohmios" << endl;
+            break;
+
+        default:
+            cout << "Opcion no valida." << endl;
+    }
+
+    return 0;
+}
+        </pre>
+
+        <!-- Video prueba -->
+        <h3>Prueba de escritorio</h3>
+        <iframe width="560" height="315" src="TU_VIDEO_URL" frameborder="0" allowfullscreen></iframe>
+
+<section>
+    <h2>Aprende más sobre Georg Simon Ohm</h2>
+    <div class="flex-container">
+        <img src="ohm.png" alt="Georg Simon Ohm" style="max-width:200px; border:1px solid #ccc; border-radius:5px;">
+        <div>
+            <p><strong>Nombre completo:</strong> Georg Simon Ohm</p>
+            <p><strong>Nacimiento:</strong> 16 de marzo de 1789, Erlangen, Alemania</p>
+            <p><strong>Fallecimiento:</strong> 6 de julio de 1854, Munich, Alemania</p>
+            <p><strong>Conocido por:</strong> Formular la Ley de Ohm, que establece la relación entre voltaje, corriente y resistencia en los circuitos eléctricos.</p>
+            <p><strong>Formación:</strong> Estudió en la Universidad de Erlangen y fue profesor de matemáticas y física en varios institutos técnicos de Alemania.</p>
+            <p><strong>Curiosidades:</strong> 
+                <ul>
+                    <li>Su trabajo fue inicialmente rechazado por la comunidad científica, pero más tarde fue reconocido y premiado.</li>
+                    <li>Recibió la medalla Copley de la Royal Society de Londres en 1841 por su investigación en electricidad.</li>
+                    <li>Su nombre fue dado a la unidad de resistencia eléctrica, el ohmio (Ω).</li>
+                </ul>
+            </p>
+        </div>
+    </div>
+</section>
+
+
+<!-- 6. Referencias -->
+<section>
+    <h2>Referencias</h2>
+    <ul>
+        <li>
+            Electricity‑Magnetism. (s. f.). <em>Ley de Ohm: Explicación, fórmula y uso</em>. 
+            Recuperado de: <a href="https://www.electricity-magnetism.org/es/ley-de-ohm-explicacion-formula-y-uso/" target="_blank">https://www.electricity-magnetism.org/es/ley-de-ohm-explicacion-formula-y-uso/</a>
+        </li>
+    </ul>
+</section>
